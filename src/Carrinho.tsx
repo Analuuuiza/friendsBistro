@@ -176,7 +176,9 @@ const styles = StyleSheet.create ({
         fontSize: 20,
         fontWeight: 'bold',
         marginVertical: 3,
-        color: '#84349c'
+        color: '#84349c',
+        borderBottomWidth: 2,
+        borderBottomColor: '#84349c'
     },
     imagemF: {
         flex: 1,
