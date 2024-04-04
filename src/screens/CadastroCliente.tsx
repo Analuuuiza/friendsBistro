@@ -3,26 +3,30 @@ import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View }
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import axios from "axios";
 
-const CadastroProduto: React.FC = () => {
-    const [produtos, setProdutos] = useState<Produto[]>([]);
+const CadastroCliente: React.FC = () => {
+    const [clientes, setClientes] = useState<Cadastro[]>([]);
     const [nome, setNome] = useState<string>('');
-    const [preco, setPreco] = useState<string>('');
-    const [ingredientes, setIngredientes] = useState<string>('');
+    const [telefone, setTelefone] = useState<string>('');
+    const [endereco, setEndereco] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [imagem, setImagem] = useState<any>('');
 
     const cadastrarProduto = async () => {
         try{
         const formData = new FormData();
         formData.append('nome', nome);
-        formData.append('preco', preco);
-        formData.append('ingredientes', ingredientes);
+        formData.append('telefone', telefone);
+        formData.append('endereco', endereco);
+        formData.append('email', email);
+        formData.append('password', password);
         formData.append('imagem', {
             uri: imagem,
             type: 'image/jpeg',
             name: new Date() + '.jpeg'
         });
 
-        const response = await axios.post('http://10.137.11.229:8000/api/produtos', formData ,{
+        const response = await axios.post('http://10.137.11.229:8000/api/cadastros', formData ,{
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -44,7 +48,7 @@ const CadastroProduto: React.FC = () => {
 
         launchCamera(options, response => {
             if(response.didCancel){
-                console.log('cancelado pelo usuário');
+                console.log('cancelado pelo cliente');
             } else if(response.error){
                 console.log('erro ao abrir a camera');
             } else {
@@ -65,7 +69,7 @@ const CadastroProduto: React.FC = () => {
 
         launchImageLibrary(options, (response)=>{
             if(response.didCancel){
-                console.log('cancelado pelo usuário');
+                console.log('cancelado pelo cliente');
             } else if(response.error){
                 console.log('erro ao abrir a galeria');
             } else{
@@ -84,19 +88,31 @@ const CadastroProduto: React.FC = () => {
             <View style={styles.form}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nome do Produto"
+                    placeholder="Nome"
                     value={nome}
                     onChangeText={setNome} />
                 <TextInput
                     style={styles.input}
-                    placeholder="Preço"
-                    value={preco}
-                    onChangeText={setPreco} />
+                    placeholder="Telefone"
+                    value={telefone}
+                    onChangeText={setTelefone} />
                 <TextInput 
                     style={styles.input}
-                    placeholder="Ingredientes"
-                    value={ingredientes}
-                    onChangeText={setIngredientes} 
+                    placeholder="Endereço"
+                    value={endereco}
+                    onChangeText={setEndereco} 
+                    multiline />
+                <TextInput
+                    style={styles.input}
+                    placeholder="E-mail"
+                    value={email}
+                    onChangeText={setEmail} 
+                    multiline />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Senha"
+                    value={password}
+                    onChangeText={setPassword} 
                     multiline />
                 <View style={styles.alinhamentoImagemSelecionada}>
                     {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> : null}
@@ -108,7 +124,7 @@ const CadastroProduto: React.FC = () => {
                     <Text style={styles.imageButtonText}>Tirar Foto</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={cadastrarProduto}>
-                    <Text style={styles.buttonText}>Cadastrar Produto</Text>
+                    <Text style={styles.buttonText}>Cadastrar Cliente</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -175,4 +191,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CadastroProduto;
+export default CadastroCliente;
