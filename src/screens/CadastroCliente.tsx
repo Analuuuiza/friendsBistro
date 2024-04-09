@@ -9,6 +9,7 @@ const CadastroCliente: React.FC = () => {
     const [telefone, setTelefone] = useState<string>('');
     const [endereco, setEndereco] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [CPF, setCPF] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [imagem, setImagem] = useState<any>('');
 
@@ -19,6 +20,7 @@ const CadastroCliente: React.FC = () => {
         formData.append('telefone', telefone);
         formData.append('endereco', endereco);
         formData.append('email', email);
+        formData.append('CPF', CPF);
         formData.append('password', password);
         formData.append('imagem', {
             uri: imagem,
@@ -110,6 +112,12 @@ const CadastroCliente: React.FC = () => {
                     placeholder="E-mail"
                     value={email}
                     onChangeText={setEmail} 
+                    multiline />
+                     <TextInput
+                    style={styles.input}
+                    placeholder="CPF"
+                    value={CPF}
+                    onChangeText={setCPF} 
                     multiline />
                 <TextInput
                     style={styles.input}
