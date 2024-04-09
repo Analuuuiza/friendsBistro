@@ -26,7 +26,7 @@ const dados: Item[] = [
     {id: "13", nome: "𝙱𝚘𝚕𝚘 𝚍𝚘 𝚁𝚘𝚜𝚜", preco: "R$: 8.00", descricao:"descrição: Bolo de chocolate com cobertura de geleia de morango.", imagem: require('./assets/image/bolo.png')},
     {id: "14", nome: "𝚇-𝙿𝚒𝚟𝚘𝚝", preco: "R$: 16.00", descricao:"descrição: Pão, salsicha, molho verde, calabresa, batata palha, milho, cheddar.", imagem: require('./assets/image/lanche.png')},
     {id: "15", nome: "𝙲𝚎𝚛𝚟𝚎𝚓𝚊 𝙲𝚑𝚊𝚗𝚍𝚕𝚎𝚛", preco: "R$: 6.00", descricao:"descrição: Bebiba alcoolica.", imagem: require('./assets/image/cerveja.png')},
-];
+]; 
 
 const renderItem = ({ item }: {item: Item}) => (
     <TouchableOpacity style={styles.item}>

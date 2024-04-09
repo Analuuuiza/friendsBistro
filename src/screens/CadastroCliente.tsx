@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import axios from "axios";
 
@@ -81,11 +81,14 @@ const CadastroCliente: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor="red" barStyle="light-content" />
+            <ImageBackground source={require('../assets/image/friends.png')} style={styles.imagemF}> 
+            <StatusBar backgroundColor="#FFE337" barStyle="light-content" />
             <View style={styles.header}>
-                <Text style={styles.headerText}>Top Food</Text>
+                <Image source={require('../assets/image/logo.png')} style={styles.image}/>
             </View>
+           <ScrollView>
             <View style={styles.form}>
+                <Text style={styles.title}>Cadastro de Clientes</Text>
                 <TextInput
                     style={styles.input}
                     placeholder="Nome"
@@ -127,18 +130,81 @@ const CadastroCliente: React.FC = () => {
                     <Text style={styles.buttonText}>Cadastrar Cliente</Text>
                 </TouchableOpacity>
             </View>
+            </ScrollView>
+            <View style={styles.footer}>
+            <TouchableOpacity>
+                <Image 
+                source={require('../assets/image/home.png')}
+                style={styles.footerIcon}
+                />
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Image 
+                source={require('../assets/image/pedido.png')}
+                style={styles.footerIcon}
+                />
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Image 
+                source={require('../assets/image/perfil.png')}
+                style={styles.footerIcon}
+                />
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Image 
+                source={require('../assets/image/menu.png')}
+                style={styles.footerIcon}
+                />
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Image 
+                source={require('../assets/image/iconC.png')}
+                style={styles.footerIcon}
+                />
+            </TouchableOpacity>
+        </View>
+            </ImageBackground>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#FFE337'
+    },
+    perfil: {
+        width: 50,
+        height: 50,
+        left: 165,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginVertical: 3,
+        color: '#84349c',
+        left: 95,
+        marginBottom: 10
     },
     header: {
-        backgroundColor: 'red',
-        paddingVertical: 10,
+        backgroundColor: '#f3bc04',
         alignItems: 'center'
+    },
+    image: {
+        width: 500,
+        height: 110,
+        borderRadius: 70
+    },
+    imagemF: {
+        flex: 1,
+    },
+    footerIcon: {
+        width: 30,
+        height: 30
     },
     headerText: {
         fontSize: 20,
@@ -147,26 +213,39 @@ const styles = StyleSheet.create({
     },
     form: {
         padding: 10,
-        backgroundColor: '#f0f0f0',
-        marginBottom: 10
+        backgroundColor: '#FFE337',
+        marginBottom: 10,
+        marginTop: 70,
+        borderRadius: 20
+    },
+    footer: {
+        borderTopWidth: 0.2,
+        backgroundColor: '#F7E855',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingVertical: 10,
+        marginTop: 20
     },
     input: {
         height: 40,
-        borderColor: 'gray',
+        borderColor: 'black',
         borderWidth: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        backgroundColor: '#b47cc4'
     },
     imageButton: {
-        backgroundColor: 'red',
+        backgroundColor: '#84349c',
         padding: 10,
-        borderRadius: 5,
+        borderRadius:20,
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop: 10
     },
     imageButtonText: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold'
     },
     imagemSelecionada: {
@@ -180,13 +259,15 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     button: {
-        backgroundColor: 'red',
+        backgroundColor: '#84349c',
         padding: 10,
-        borderRadius: 5,
-        alignItems: 'center'
+        borderRadius: 20,
+        alignItems: 'center',
+        marginBottom: 10,
+        marginTop: 10
     },
     buttonText: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold'
     },
 });
