@@ -7,7 +7,11 @@ import CadastroCliente from "./src/screens/CadastroCliente";
 
 function App(): React.JSX.Element {
   return (
-    <CadastroCliente />
+   //<CadastroCliente />
+ //<CadastroProduto />
+ <Cardapio />
+ //<Carrinho />
+
   );
 }
 
