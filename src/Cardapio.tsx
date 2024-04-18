@@ -40,7 +40,7 @@ function Cardapio(): React.JSX.Element {
         <TouchableOpacity style={styles.item}>
             <Text style={styles.title}>{item.nome}</Text>
             <Text style={styles.text}>{item.ingredientes}</Text>
-            <Image source={{ uri: item.imagem }} style={styles.foto} />
+            <Image source={item.imagem ? { uri: item.imagem } : require('./assets/image/bolo.png')} style={styles.foto} />
             <Text style={styles.text1}>{item.preco}</Text>
         </TouchableOpacity>
     );
