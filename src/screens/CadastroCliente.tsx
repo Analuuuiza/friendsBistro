@@ -12,8 +12,40 @@ const CadastroCliente: React.FC = () => {
     const [CPF, setCPF] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [imagem, setImagem] = useState<any>('');
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
-    const cadastrarProduto = async () => {
+
+    const validarCampos = () => {
+        const errors: Record<string, string> = {};
+
+        if (!imagem) {
+            errors.imagem = "A Foto é obrigatória";
+        }
+        if (!nome) {
+            errors.nome = "O nome é obrigatório";
+        } 
+        if (!endereco) {
+            errors.endereco = "O endereço é obrigatório";
+        }
+        if (!telefone) {
+            errors.telefone = "O telefone é obrigatório";
+        }
+        if (!email) {
+            errors.email = "O e-mail é obrigatório";
+        }
+        if (!CPF) {
+            errors.cpf = "O CPF é obrigatório";
+        }
+        if (!password) {
+            errors.password = "A senha é obrigatória";
+        }
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    }
+        const cadastrarCliente = async () => {
+            if (!validarCampos()) {
+                return;
+            }
         try{
         const formData = new FormData();
         formData.append('nome', nome);
@@ -95,46 +127,47 @@ const CadastroCliente: React.FC = () => {
                     style={styles.input}
                     placeholder="Nome"
                     value={nome}
-                    onChangeText={setNome} />
+                    onChangeText={setNome} />{errors.nome && <Text style={styles.errorText}>{errors.nome}</Text>}
                 <TextInput
                     style={styles.input}
                     placeholder="Telefone"
                     value={telefone}
-                    onChangeText={setTelefone} />
+                    onChangeText={setTelefone} />{errors.telefone && <Text style={styles.errorText}>{errors.telefone}</Text>}
                 <TextInput 
                     style={styles.input}
                     placeholder="Endereço"
                     value={endereco}
                     onChangeText={setEndereco} 
-                    multiline />
+                    multiline />{errors.endereco && <Text style={styles.errorText}>{errors.endereco}</Text>}
                 <TextInput
                     style={styles.input}
                     placeholder="E-mail"
                     value={email}
                     onChangeText={setEmail} 
-                    multiline />
+                    multiline />{errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
                      <TextInput
                     style={styles.input}
                     placeholder="CPF"
                     value={CPF}
                     onChangeText={setCPF} 
-                    multiline />
+                    multiline />{errors.cpf && <Text style={styles.errorText}>{errors.cpf}</Text>}
                 <TextInput
                     style={styles.input}
                     placeholder="Senha"
                     value={password}
                     onChangeText={setPassword} 
-                    multiline />
+                    multiline />{errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+
                 <View style={styles.alinhamentoImagemSelecionada}>
                     {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> : null}
-                </View>
+                </View>{errors.imagem && <Text style={styles.errorText}>{errors.imagem}</Text>}
                 <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
                     <Text style={styles.imageButtonText}>Selecionar Imagem</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.imageButton} onPress={abrirCamera}>
                     <Text style={styles.imageButtonText}>Tirar Foto</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={cadastrarProduto}>
+                <TouchableOpacity style={styles.button} onPress={cadastrarCliente}>
                     <Text style={styles.buttonText}>Cadastrar Cliente</Text>
                 </TouchableOpacity>
             </View>
@@ -179,7 +212,6 @@ const CadastroCliente: React.FC = () => {
         </View>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -189,6 +221,10 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         left: 165,
+    },
+    errorText: {
+        color: '#84349c',
+        marginBottom: 5,
     },
     title: {
         fontSize: 20,

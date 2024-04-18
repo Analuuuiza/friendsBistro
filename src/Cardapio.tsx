@@ -39,9 +39,9 @@ function Cardapio(): React.JSX.Element {
     const renderItem = ({ item }: { item: Item }) => (
         <TouchableOpacity style={styles.item}>
             <Text style={styles.title}>{item.nome}</Text>
-            <Text style={styles.text1}>{item.preco}</Text>
             <Text style={styles.text}>{item.ingredientes}</Text>
             <Image source={{ uri: item.imagem }} style={styles.foto} />
+            <Text style={styles.text1}>{item.preco}</Text>
         </TouchableOpacity>
     );
 
